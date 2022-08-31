@@ -24,6 +24,12 @@ def decryptSubstitutionCipher(ciphertext, key):
             plaintext += c
     return plaintext
 
+def encryptEnigma(ciphertext, keys):
+    for key in keys:
+        ciphertext = encryptSubstitutionCipher(ciphertext, key)
+    return ciphertext
+
+
 def main():
 
     plaintext = input("Enter plaintext: ")
@@ -32,11 +38,9 @@ def main():
     for i in range(keyLength):
         keys.append(int(input("Enter key " + str(i+1) + ": ")))
 
-    previousText = plaintext
-    for i in range(keyLength):
-        ciphertext = encryptSubstitutionCipher(previousText, keys[i])
-        print("Ciphertext " + str(i+1) + ": " + ciphertext)
-        previousText = ciphertext
+    ciphertext = encryptEnigma(plaintext, keys)
+    print("Ciphertext: " + ciphertext)
+    previousText = ciphertext
 
     for i in range(keyLength):
         decryptedtext = decryptSubstitutionCipher(previousText, keys[keyLength - i - 1])
