@@ -43,23 +43,27 @@ def decryptEnigma(ciphertext, keys):
         if debug: print("Decrypted text: " + ciphertext)
     return ciphertext
 
+
 def main():
 
     plaintext = "Welcome to the Enigma machine"
-    # keys = [1, 2, 3]
-    keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+    password = plaintext
+    keys = []
+
 
     if interactive:
         plaintext = input("Enter plaintext: ")
-        keyLength = int(input("Enter number of keys: "))
-        keys = []
-        for i in range(keyLength):
-            keys.append(int(input("Enter key " + str(i+1) + ": ")))
+        password = input("Enter a password: ")
+
+    for c in password:
+        keys.append(ord(c) - ord('a'))
 
     ciphertext = encryptEnigma(plaintext, keys)
     decryptedtext = decryptEnigma(ciphertext, keys)
 
-    print("\nPlain text:\t  " + plaintext)
+    print("\nPassword:\t  " + password)
+    print("Keys:\t\t  " + str(keys))
+    print("Plain text:\t  " + plaintext)
     print("Cipher text:\t  " + ciphertext)
     print("Decrypted text:\t  " + decryptedtext)
     if plaintext != decryptedtext:
