@@ -1,6 +1,9 @@
 debug = True
 debug = False
 
+interactive = True
+interactive = False
+
 def encryptSubstitutionCipher(plaintext, key):
     ciphertext = ""
     for c in plaintext:
@@ -40,39 +43,28 @@ def decryptEnigma(ciphertext, keys):
         if debug: print("Decrypted text: " + ciphertext)
     return ciphertext
 
-
 def main():
 
-    # plaintext = input("Enter plaintext: ")
     plaintext = "hello ethan"
-    # print("Plaintext: " + plaintext)
-
-    # keyLength = int(input("Enter number of keys: "))
-    # keyLength = 3
-
-    # keys = []
-    # for i in range(keyLength):
-    #     keys.append(int(input("Enter key " + str(i+1) + ": ")))
     keys = [1, 2, 3]
 
-    ciphertext = encryptEnigma(plaintext, keys)
-    # print("Ciphertext: " + ciphertext)
-    # previousText = ciphertext
+    if interactive:
+        plaintext = input("Enter plaintext: ")
+        keyLength = int(input("Enter number of keys: "))
+        keys = []
+        for i in range(keyLength):
+            keys.append(int(input("Enter key " + str(i+1) + ": ")))
 
-    # for i in range(keyLength):
-    #     decryptedtext = decryptSubstitutionCipher(previousText, keys[keyLength - i - 1])
-    #     print("Plaintext " + str(i+1) + ": " + decryptedtext)
-    #     previousText = decryptedtext
+    ciphertext = encryptEnigma(plaintext, keys)
     decryptedtext = decryptEnigma(ciphertext, keys)
 
-    # print("\'" + plaintext + "\' >>> \'" + ciphertext + "\' >>> \'" + decryptedtext + "\'")
-    print("Plaintext:\t" + plaintext)
-    print("Ciphertext:\t" + ciphertext)
-    print("Decrypted text:\t" + decryptedtext)
+    print("\nPlain text:\t  " + plaintext)
+    print("Cipher text:\t  " + ciphertext)
+    print("Decrypted text:\t  " + decryptedtext)
     if plaintext != decryptedtext:
-        print("Decryption failed")
+        print("\nDecryption Failed!\n")
     else:
-        print("Decryption successful")
+        print("\nDecryption Successful!\n")
 
 if __name__ == "__main__":
     main()
