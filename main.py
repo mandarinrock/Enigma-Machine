@@ -50,7 +50,6 @@ def main():
     password = plaintext
     keys = []
 
-
     if interactive:
         plaintext = input("\nEnter plaintext: ")
         password = input("Enter a password: ")
