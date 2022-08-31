@@ -50,12 +50,19 @@ def main():
     password = plaintext
     keys = []
 
-    if interactive:
-        plaintext = input("\nEnter plaintext: ")
-        password = input("Enter a password: ")
-
+    if interactive: password = input("\nEnter a password: ")
     for c in password:
         keys.append(ord(c) - ord('a'))
+
+    if interactive:
+        while True:
+            print("\nPress 'Enter' without typing anything to exit")
+            plaintext = input("Enter a message to encrypt/decrypt: ")
+            if plaintext == "": exit()
+            print("Encrypted message: " + encryptEnigma(plaintext, keys))
+            print("Decrypted message: " + decryptEnigma(plaintext, keys))
+            # exit()
+
 
     ciphertext = encryptEnigma(plaintext, keys)
     decryptedtext = decryptEnigma(ciphertext, keys)
