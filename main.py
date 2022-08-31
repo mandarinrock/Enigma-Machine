@@ -2,7 +2,7 @@ debug = True
 debug = False
 
 interactive = True
-interactive = False
+# interactive = False
 
 def encryptSubstitutionCipher(plaintext, key):
     ciphertext = ""
@@ -52,7 +52,7 @@ def main():
 
 
     if interactive:
-        plaintext = input("Enter plaintext: ")
+        plaintext = input("\nEnter plaintext: ")
         password = input("Enter a password: ")
 
     for c in password:
