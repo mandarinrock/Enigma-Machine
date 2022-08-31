@@ -24,26 +24,26 @@ def decryptSubstitutionCipher(ciphertext, key):
             plaintext += c
     return plaintext
 
-
-
 def main():
+
     plaintext = input("Enter plaintext: ")
-    firstKey = int(input("Enter first key: "))
-    secondKey = int(input("Enter second key: "))
-    thirdKey = int(input("Enter third key: "))
-    firstCipher = encryptSubstitutionCipher(plaintext, firstKey)
-    print("First ciphertext: " + firstCipher)
-    secondCipher = encryptSubstitutionCipher(firstCipher, secondKey)
-    print("Second ciphertext: " + secondCipher)
-    thirdCipher = encryptSubstitutionCipher(secondCipher, thirdKey)
-    print("Third ciphertext: " + thirdCipher)
-    firstPlain = decryptSubstitutionCipher(thirdCipher, thirdKey)
-    print("First plaintext: " + firstPlain)
-    secondPlain = decryptSubstitutionCipher(firstPlain, secondKey)
-    print("Second plaintext: " + secondPlain)
-    thirdPlain = decryptSubstitutionCipher(secondPlain, firstKey)
-    print("Third plaintext: " + thirdPlain)
-    if plaintext != thirdPlain:
+    keyLength = int(input("Enter number of keys: "))
+    keys = []
+    for i in range(keyLength):
+        keys.append(int(input("Enter key " + str(i+1) + ": ")))
+
+    previousText = plaintext
+    for i in range(keyLength):
+        ciphertext = encryptSubstitutionCipher(previousText, keys[i])
+        print("Ciphertext " + str(i+1) + ": " + ciphertext)
+        previousText = ciphertext
+
+    for i in range(keyLength):
+        decryptedtext = decryptSubstitutionCipher(previousText, keys[keyLength - i - 1])
+        print("Plaintext " + str(i+1) + ": " + decryptedtext)
+        previousText = decryptedtext
+
+    if plaintext != decryptedtext:
         print("Decryption failed")
     else:
         print("Decryption successful")
